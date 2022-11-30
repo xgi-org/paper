@@ -106,7 +106,7 @@ The XGI library offers 4 main types of file input and output:
 * A list of hyperedges, where each line of the file is a hyperedge
 * A list of bipartite edges, where each line is a (node, edge) entry
 * An incidence matrix, where each column corresponds to a particular hyperedge, and the non-zero entries correspond to the nodes that participate in that hyperedge.
-* A JSON file, the structure of which is described in more detail in \Cref{sec:software_xgi-data}.
+* A JSON file.
 
 ## Algorithms
 
