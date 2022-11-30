@@ -7,29 +7,34 @@ tags:
   - simplicial complex
 authors:
   - name: Nicholas W. Landry
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0003-1270-4980
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
     corresponding: true
   - name: Leo Torres
     affiliation: 2
   - name: Maxime Lucas
+    orcid: 0000-0001-8087-2981
     affiliation: 4
   - name: Iacopo Iacopini
+    orcid: 0000-0001-8794-6410
     affiliation: 5
   - name: Giovanni Petri
+    orcid: 0000-0003-1847-5031
     affiliation: 4
   - name: Alice Patania
+    orcid: 0000-0002-3047-4376
     affiliation: "1, 2"
   - name: Alice Schwarze
     affiliation: 6
   - name: Martina Contisciani
+    orcid: 0000-0002-6103-5499
     affiliation: 7
 affiliations:
  - name: Vermont Complex Systems Center, USA
    index: 1
- - name: Department of Mathematics, University of Vermont, USA
+ - name: Department of Mathematics and Statistics, University of Vermont, USA
    index: 2
- - name: Max Planck Institute, Germany
+ - name: Max Planck Institute for Mathematics in the Sciences, Germany
    index: 3
  - name: CENTAI Institute, Italy
    index: 4
@@ -39,8 +44,8 @@ affiliations:
    index: 6
  - name: Max Planck Institute for Intelligent Systems, Germany
 
-date: Sometime in the future
-bibliography: paper.bib
+date: 03/12/2023
+bibliography: references.bib
 
 ---
 
@@ -78,7 +83,7 @@ Citations to entries in paper.bib should be in
 format.
 
 If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+citation) then you can do it with the example BibTeX entry below for [@fidgit].
 
 For a quick reference, the following citation commands can be used:
 - `@author:2001`  ->  "Author et al. (2001)"
@@ -87,12 +92,12 @@ For a quick reference, the following citation commands can be used:
 
 # Figures
 
-Figures can be included like this:
+<!-- Figures can be included like this:
 ![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
+and referenced from text using \autoref{fig:example}. -->
 
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+<!-- Figure sizes can be customized by adding an optional second parameter:
+![Caption for example figure.](figure.png){ width=20% } -->
 
 # Acknowledgements
 
