@@ -11,6 +11,7 @@ authors:
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
     corresponding: true
   - name: Leo Torres
+    orcid: 0000-0002-2675-2775
     affiliation: 2
   - name: Maxime Lucas
     orcid: 0000-0001-8087-2981
