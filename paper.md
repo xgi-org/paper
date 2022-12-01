@@ -8,7 +8,8 @@ tags:
 authors:
   - name: Nicholas W. Landry
     orcid: 0000-0003-1270-4980
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: "1, 2"
+    email: nicholas.landry@uvm.edu
     corresponding: true
   - name: Leo Torres
     orcid: 0000-0002-2675-2775
@@ -26,6 +27,7 @@ authors:
     orcid: 0000-0002-3047-4376
     affiliation: "1, 2"
   - name: Alice Schwarze
+    orcid: 0000-0002-9146-8068
     affiliation: 6
   - name: Martina Contisciani
     orcid: 0000-0002-6103-5499
