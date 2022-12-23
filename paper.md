@@ -28,10 +28,7 @@ authors:
     affiliation: "1, 2"
   - name: Alice Schwarze
     orcid: 0000-0002-9146-8068
-    affiliation: 6
-  - name: Martina Contisciani
-    orcid: 0000-0002-6103-5499
-    affiliation: 7
+    affiliation: 5
 affiliations:
  - name: Vermont Complex Systems Center, USA
    index: 1
@@ -45,7 +42,6 @@ affiliations:
    index: 5
  - name: Department of Mathematics, Dartmouth College, USA
    index: 6
- - name: Max Planck Institute for Intelligent Systems, Germany
 
 date: 03/12/2023
 bibliography: references.bib
@@ -53,7 +49,6 @@ bibliography: references.bib
 ---
 
 # Summary
-
 The Comple**X** **G**roup **I**nteractions (XGI) library provides data structures and algorithms for modeling and analyzing complex systems with group (higher-order) interactions.
 
 Many datasets can be represented as graphs, where pairs of entities (or nodes) are related via links (or edges). Examples are road networks, energy grids, social networks, neural networks, etc. However, in many other datasets, more than two entities can be related at a time. For example, many scientists (entities) can collaborate on a scientific article together (links), and multiple email accounts (entities) can all participate on the same email thread (links). In this latter case, graphs no longer present a viable alternative to represent such datasets. It is for this kind of datasets, where the interactions are given among groups of more than two entities (also called higher-order interactions), that XGI was designed for.
@@ -61,54 +56,36 @@ Many datasets can be represented as graphs, where pairs of entities (or nodes) a
 XGI is implemented in pure Python and is designed to seamlessly interoperate with the rest of the Python scientific stack (numpy, scipy, pandas, matplotlib, etc). XGI is designed and developed by network scientists with the needs of network scientists in mind.
 
 # Statement of need
+The field of network science often bridges across many different disciplines, bringing together theorists, computational scientists, social scientists, and many others, each with vastly different expertise. In order to facilitate collaboration and cross-disciplinary work, it is necessary to develop a tool kit that lowers the overhead cost of these collaborations. For pairwise networks, packages such as NetworkX [@SciPyProceedings_11], graph-tool [@peixoto_graph-tool_2014], and igraph have provided a common framework for cross-disciplinary researchers to more easily collaborate and contribute to the field of network science. The subfield of higher-order network science has grown rapidly over the past few years, garnering wide attention for its ability to model interactions that cannot be reduced to a pairwise representation. Rich behavior can emerge from dynamics on higher-order interaction networks [@iacopini_simplicial_2019;@hickok_bounded-confidence_2022;@neuhauser_multibody_2020] and some higher-order networks can more accurately model many empirical interaction patterns [@chodrow_configuration_2020]. These developments will have lasting impacts on fields such as computer science, infectious diseases, dynamical systems, behavioral science, and many others.  Open-source algorithms and scripts are available as individual resources for published work but these resources are not generalizable to the needs of the community at large. In addition, there are data repositories dedicated to higher-order datasets [@benson_data_2021] but with neither a standard format nor an easy method for loading these datasets. We have developed the Comple**X** **G**roup **I**nteractions (XGI) Python library to provide an open-source solution to support the higher-order network science community.
 
-The accessibility and inclusivity of a scientific community rests, in part, on its commitment to share resources. For the pairwise network community, packages such as NetworkX [@SciPyProceedings_11], graph-tool [@peixoto_graph-tool_2014], and igraph have provided a common language and tools allowing cross-disciplinary researchers to more easily collaborate and contribute to the field of network science.
-
-The sub-field of higher-order network science has grown rapidly over the past few years, garnering wide attention for its ability to offer additional insights for machine learning, the structure of complex systems, the dynamics of complex systems, and many other applications. This topic is relevant to many different fields such as computer science, infectious diseases, dynamical systems, behavioral science, and many others. Open-source code is available for hypergraph dynamics [@iacopini_simplicial_2019;@st-onge_social_2021;@landry_effect_2020], inference [@benson_simplicial_2018;@chodrow_generative_2021;@young_bayesian_2021], generative models [@chodrow_configuration_2020;@landry_effect_2020;@antelmi_analyzing_2020], algorithms [@doecode_22160;@benson_three_2019], and data [@benson_data_2021] written in languages such as Python, Julia, C++, and Matlab, but these resources are relatively piecemeal. We have developed the Comple**X** **G**roup **I**nteractions (XGI) Python library to provide an open-source resource for this community [@Landry_XGI].
+# Related Software
+There are several existing packages to represent and analyze higher-order networks: `HyperNetX` [@doecode_22160] and `Reticula` [@badie-modiri_reticula_2022] in Python, `SimpleHypergraphs.jl` [@spagnuolo_analyzing_2020]  and `HyperGraphs.jl` [@diaz_hypergraphsjl_2022] in Julia, and `hyperG` in R. XGI is a valuable addition to the toolbox of a network science practitioner for several different reasons. First, XGI emphasizes ease-of-use. This is evident in the pure Python implementation making installation easy for all operating systems, the well-documented codebase, and the `stats` module enabling researchers to easily access quantities of interest. In addition, XGI offers data structures for both hypergraphs and simplicial complexes, which makes this library useful to a wider variety of research areas. Lastly, XGI integrates higher-order datasets with its interface, not only providing a standard format in which to write hypergraphs with attributes, but also a data repository with corresponding functions to load these datasets.
 
 # Overview of the API
 
 We provide an overview of the functionality of the XGI python library.
 
-## Data structures
+## Core architecture
 
-In this section, we describe the data structures that we use.
+The data structure for hypergraphs and simplicial complexes employed by XGI is a bipartite network with nodes represented by one node class and hyperedges (or simplices) represented by another node class. [Insert Diagram] This is modeled as two dictionaries: one mapping the edge (simplex) IDs of which a node is a member and another specifying the nodes that are members of a given edge (simplex). This data structure is flexible and allows users to efficiently query relationships between nodes and edges (simplices). Each hyperedge is assigned a unique ID which is user-provided or internally generated. This choice allows multiedges, but loopy edges are forbidden because the bipartite relationships are stored as sets. Lastly, two dictionaries store the attributes of the nodes and edges respectively.
 
-### Hypergraphs
+## Hypergraphs, simplicial complexes, and mathematical representations
 
-The data structure for hypergraphs employed by XGI leverages the bipartite representation of a hypergraph which allows users to efficiently query the hyperedges of which a specified node is a part and the nodes that are members of a specified hyperedge. Each hyperedge is assigned an ID which allows for multi-hyperedges. The hypergraph data structure provided by XGI offers methods for easily getting the following:
+The hypergraph data structure provided by XGI offers methods for easily getting, for example, the number of nodes and hyperedges, the nodes that are members of a particular edge and conversely the edges to which a node belongs, subsets of hypergraphs, attributes of nodes and hyperedges. It also allows for easy creation of a hypergraph as well as adding nodes and edges with and without attributes.
 
-* The number of nodes
-* The number of hyperedges
-* The degree sequence
-* The hyperedge size sequence
-* The singleton edges
-* Subhypergraphs
-* Attributes of nodes and hyperedges (Such as weights, names, etc.)
+[SIMPLICIAL COMPLEXES HERE]
 
-### Simplicial Complexes
+A hypergraph may be represented in many different ways [@battiston_networks_2020] and different applications require different hypergraph representations for efficient computation. For example, when modeling contagion, a node's infection status may change depending on the statuses of its neighbors, indicating that a representation allowing efficient access to the node's edge neighbors is desirable. Likewise, when one is interested in computing properties of a hypergraph that is averaged over the hyperedges such as assortativity or modularity, it may be most efficient to represent a hypergraph by a list of its hyperedges. XGI provides methods for users to convert between a hypergraph and, among other things, an edge list, adjacency list, or bipartite edge list; an incidence matrix, adjacency matrix, or Laplacian matrix; or a bipartite graph.
 
-### Mathematical representations
-
-A hypergraph may be represented in a variety of ways including an incidence matrix, a bipartite network, a list of hyperedges, and many others [@battiston_networks_2020]. Different applications require different hypergraph representations for efficient computation. For example, when modeling contagion, a node's infection status may change dependent on the statuses of its neighbors, indicating that a representation allowing efficient access to the node's edge neighbors is desirable. Likewise, when one is interested in computing properties of a hypergraph that is averaged over the hyperedges such as assortativity or modularity, it may be most efficient to represent a hypergraph by a list of its hyperedges.
-
-XGI provides methods for users to convert between a hypergraph and the following formats:
-
-* A list of hyperedges
-* An adjacency list
-* An incidence matrix
-* A bipartite network
+## Stats
 
 ## File I/O
-
-There are many sources of hypergraph data [@benson_data_2021;@clauset_colorado_2016;@peixoto_netzschleuder_2021], often in very different formats which is a significant overhead cost for researchers. XGI alleviates this cost in two ways: first, by implementing methods for importing and writing hypergraphs from several different formats and second, by implementing a standard for hypergraph data in JSON format.
-
-The XGI library offers 4 main types of file input and output:
+Higher-order network datasets are often stored in a variety of different formats [@benson_data_2021;@clauset_colorado_2016;@peixoto_netzschleuder_2021], which can be a significant overhead cost for researchers trying to analyze empirical datasets. XGI alleviates this cost in two ways: first, by implementing methods for importing and writing hypergraphs from several common formats and second, by implementing a standard for hypergraph data in JSON format. The XGI library offers 4 main types of file input and output:
 
 * A list of hyperedges, where each line of the file is a hyperedge
 * A list of bipartite edges, where each line is a (node, edge) entry
 * An incidence matrix, where each column corresponds to a particular hyperedge, and the non-zero entries correspond to the nodes that participate in that hyperedge.
-* A JSON file.
+* A JSON file according to the xgi-data standard. [ADD A JSON SCHEMA?]
 
 ## Algorithms
 
@@ -127,8 +104,9 @@ Measuring connectedness in hypergraphs is important as a data exploration tool b
 * Finding the component of which a specified node is a part
 
 ## Visualization
-
+[Graphic here]
 ## Dynamics
+Perhaps this can be lumped with dynamics?
 
 # XGI-DATA
 
@@ -136,18 +114,11 @@ With larger datasets becoming more widely available, it is important to close th
 
 The XGI-DATA repository [@Landry_xgi-data] is a collection of openly available hypergraph datasets in JSON format with documentation more extensively describing the datasets. There is also a rudimentary inspection script for checking that datasets are in the proper format.
 
-# Projects dependent on XGI
+# Projects using XGI
 
 * hypercontagion
+* https://github.com/maximelucas/higherorder_sync_promoted
 
-<!-- # Figures -->
-
-<!-- Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}. -->
-
-<!-- Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% } -->
 
 # Funding
 
@@ -155,8 +126,11 @@ The XGI package has been supported by NSF Grant 2121905, "HNDS-I: Using Hypergra
 
 # Acknowledgements
 
-We acknowledge contributions from Tim LaRock, Marco Nurisso, and Sabina Adhikari.
+We acknowledge contributions from Tim LaRock, Marco Nurisso, Alexis Arnaudon, and Sabina Adhikari.
 
 
+# Future Work
+The XGI library remains under active development.
 
 # References
+
