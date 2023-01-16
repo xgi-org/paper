@@ -92,17 +92,29 @@ NodeStat('degree')
 [2, 2, 1, 1]
 ```
 
+The main benefit of the `stats` package as a whole is that any other notion that can be represented as a node-to-quantity mapping has the same interface. This includes notions such as other centrality measures and even categorical node attributes. Furthermore, all of these are given the exact same interface. For example, obtaining the average degree and average clustering coefficient over the entire network is done with a single method call:
+
 One of the main benefits of `NodeStat` objects is a common interface for common computations. For example:
 
 ```python
 >>> H.nodes.degree.mean()
 1.5
->>> H.nodes.degree.moment(2)
-2.5
+>>> H.nodes.clutering.mean()
+0.25
 ```
 
-The main benefit of the `stats` package as a whole is that any other notion that can be represented as a node-to-quantity mapping has the same interface. This includes notions such as centrality measures and node attributes. An anologous object for edge-to-quantity mappings is provided via `EdgeStat`. For more, visit the documentation.
+Lastly, multiple statistics can be handled at the same time. This example computes two such stats and outputs them in a pandas DataFrame, ready for subsequent processing:
 
+```python
+>>> H.nodes.multi(["degree", "clustering"]).aspandas()
+   degree  clustering
+0       2         0.0
+1       2         1.0
+2       1         0.0
+3       1         0.0
+```
+
+An anologous object for edge-to-quantity mappings is provided via `EdgeStat`.
 
 ## File I/O
 Higher-order network datasets are often stored in a variety of different formats [@benson_data_2021;@clauset_colorado_2016;@peixoto_netzschleuder_2021], which can be a significant overhead cost for researchers trying to analyze empirical datasets. XGI alleviates this cost in two ways: first, by implementing methods for importing and writing hypergraphs from several common formats and second, by implementing a standard for hypergraph data in JSON format. The XGI library offers 4 main types of file input and output:
