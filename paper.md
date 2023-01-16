@@ -75,7 +75,7 @@ The hypergraph data structure provided by XGI offers methods for easily getting,
 A hypergraph may be represented in many different ways [@battiston_networks_2020] and different applications require different hypergraph representations for efficient computation. For example, when modeling contagion, a node's infection status may change depending on the statuses of its neighbors, indicating that a representation allowing efficient access to the node's edge neighbors is desirable. Likewise, when one is interested in computing properties of a hypergraph that is averaged over the hyperedges such as assortativity or modularity, it may be most efficient to represent a hypergraph by a list of its hyperedges. XGI provides methods for users to convert between a hypergraph and, among other things, an edge list, adjacency list, or bipartite edge list; an incidence matrix, adjacency matrix, or Laplacian matrix; or a bipartite graph.
 
 ## Stats
-In XGI, the core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an interface with which to build the nodes and links of a network, whereas the `stats` package provides a way to compute summary statistics or other quantities of interest from these networks. The main class defined by the `stats` package is `NodeStat`, which is an abstract representation of a mapping from a node to a quantity. For example, the degree of a node (i.e. the number of edges it belongs to) is a quantity that assigns an integer to each node in the network. The degree in XGI is available via the `nodes` attribute of a network:
+In XGI, the core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an interface with which to build the nodes and links of a network, whereas the `stats` package provides a way to compute summary statistics or other quantities of interest from these networks. The main class defined by the `stats` package is `NodeStat`, which is an abstract representation of a mapping from a node to a quantity. For example, the degree of a node (i.e. the number of edges it belongs to) is a quantity that assigns an integer to each node in the network, thus it is a node-to-quantity mapping. The degree in XGI is available via the `nodes` attribute of a network:
 
 ```python
 >>> H = xgi.Hypergraph([[0], [0, 1], [1, 2, 3]])
@@ -83,7 +83,7 @@ In XGI, the core network classes (i.e. `Hypergraph` and `SimplicialComplex`) pro
 NodeStat('degree')
 ```
 
-`NodeStat` objects are lazy evaluated, so a specific output type must be requested:
+`NodeStat` objects are lazily evaluated, so a specific output type must be requested:
 
 ```python
 >>> H.nodes.degree.asdict()
@@ -92,9 +92,7 @@ NodeStat('degree')
 [2, 2, 1, 1]
 ```
 
-The main benefit of the `stats` package as a whole is that any other notion that can be represented as a node-to-quantity mapping has the same interface. This includes notions such as other centrality measures and even categorical node attributes. Furthermore, all of these are given the exact same interface. For example, obtaining the average degree and average clustering coefficient over the entire network is done with a single method call:
-
-One of the main benefits of `NodeStat` objects is a common interface for common computations. For example:
+The main benefit of the `stats` package is that any other notion that can be conceived of as a node-to-quantity mapping has the same interface. This includes notions such as other centrality measures, categorical node attributes, and even user-defined functions. Furthermore, all of these are given the exact same interface. For example, obtaining the average degree or average clustering coefficient over the entire network (or the average of any other node-to-quantity mapping) is done with a single method call:
 
 ```python
 >>> H.nodes.degree.mean()
@@ -103,7 +101,7 @@ One of the main benefits of `NodeStat` objects is a common interface for common 
 0.25
 ```
 
-Lastly, multiple statistics can be handled at the same time. This example computes two such stats and outputs them in a pandas DataFrame, ready for subsequent processing:
+Multiple statistics can be handled at the same time. This example computes two statitics and outputs them in a pandas DataFrame, ready for subsequent processing:
 
 ```python
 >>> H.nodes.multi(["degree", "clustering"]).aspandas()
