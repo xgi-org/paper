@@ -53,10 +53,10 @@ The Comple**X** **G**roup **I**nteractions (XGI) library provides data structure
 
 Many datasets can be represented as graphs, where pairs of entities (or nodes) are related via links (or edges). Examples are road networks, energy grids, social networks, neural networks, etc. However, in many other datasets, more than two entities can be related at a time. For example, many scientists (entities) can collaborate on a scientific article together (links), and multiple email accounts (entities) can all participate on the same email thread (links). In this latter case, graphs no longer present a viable alternative to represent such datasets. It is for this kind of datasets, where the interactions are given among groups of more than two entities (also called higher-order interactions), that XGI was designed for.
 
-XGI is implemented in pure Python and is designed to seamlessly interoperate with the rest of the Python scientific stack (numpy, scipy, pandas, matplotlib, etc). XGI is designed and developed by network scientists with the needs of network scientists in mind.
+XGI is implemented in pure Python and is designed to seamlessly interoperate with the rest of the Python scientific stack (numpy, scipy, pandas, matplotlib, NetworkX). XGI is designed and developed by network scientists with the needs of network scientists in mind.
 
 # Statement of need
-The field of network science often bridges across many different disciplines, bringing together theorists, computational scientists, social scientists, and many others, each with vastly different expertise. In order to facilitate collaboration and cross-disciplinary work, it is necessary to develop a tool kit that lowers the overhead cost of these collaborations. For pairwise networks, packages such as NetworkX [@SciPyProceedings_11], graph-tool [@peixoto_graph-tool_2014], and igraph have provided a common framework for cross-disciplinary researchers to more easily collaborate and contribute to the field of network science. The subfield of higher-order network science has grown rapidly over the past few years, garnering wide attention for its ability to model interactions that cannot be reduced to a pairwise representation. Rich behavior can emerge from dynamics on higher-order interaction networks [@iacopini_simplicial_2019;@hickok_bounded-confidence_2022;@neuhauser_multibody_2020] and some higher-order networks can more accurately model many empirical interaction patterns [@chodrow_configuration_2020]. These developments will have lasting impacts on fields such as computer science, infectious diseases, dynamical systems, behavioral science, and many others.  Open-source algorithms and scripts are available as individual resources for published work but these resources are not generalizable to the needs of the community at large. In addition, there are data repositories dedicated to higher-order datasets [@benson_data_2021] but with neither a standard format nor an easy method for loading these datasets. We have developed the Comple**X** **G**roup **I**nteractions (XGI) Python library to provide an open-source solution to support the higher-order network science community.
+The field of network science often bridges across many different disciplines, bringing together theorists, computational scientists, social scientists, and many others, each with vastly different expertise. In order to facilitate collaboration and cross-disciplinary work, it is necessary to develop a tool kit that decreases the overhead cost of these collaborations. For pairwise networks, packages such as NetworkX [@SciPyProceedings_11], graph-tool [@peixoto_graph-tool_2014], and igraph have provided a common framework for cross-disciplinary researchers to more easily collaborate and contribute to the field of network science. The subfield of higher-order network science has grown rapidly over the past few years, garnering wide attention for its ability to model interactions that cannot be reduced to a pairwise representation. Rich behavior can emerge from dynamics on higher-order interaction networks [@iacopini_simplicial_2019;@hickok_bounded-confidence_2022;@neuhauser_multibody_2020] and some higher-order networks can more accurately model many empirical interaction patterns [@chodrow_configuration_2020]. These developments will have lasting impacts on fields such as computer science, infectious diseases, dynamical systems, behavioral science, and many others.  Open-source algorithms and scripts are available as individual resources for published work but these resources are not generalizable to the needs of the community at large. In addition, there are data repositories dedicated to higher-order datasets [@benson_data_2021] but with neither a standard format nor an easy method for loading these datasets. We have developed the Comple**X** **G**roup **I**nteractions (XGI) Python library to provide an open-source solution to support the higher-order network science community.
 
 # Related Software
 There are several existing packages to represent and analyze higher-order networks: `HyperNetX` [@doecode_22160] and `Reticula` [@badie-modiri_reticula_2022] in Python, `SimpleHypergraphs.jl` [@spagnuolo_analyzing_2020]  and `HyperGraphs.jl` [@diaz_hypergraphsjl_2022] in Julia, and `hyperG` in R. XGI is a valuable addition to the toolbox of a network science practitioner for several different reasons. First, XGI emphasizes ease-of-use. This is evident in the pure Python implementation making installation easy for all operating systems, the well-documented codebase, and the `stats` module enabling researchers to easily access quantities of interest. In addition, XGI offers data structures for both hypergraphs and simplicial complexes, which makes this library useful to a wider variety of research areas. Lastly, XGI integrates higher-order datasets with its interface, not only providing a standard format in which to write hypergraphs with attributes, but also a data repository with corresponding functions to load these datasets.
@@ -65,16 +65,43 @@ There are several existing packages to represent and analyze higher-order networ
 We provide an overview of the functionality of the XGI python library.
 
 ## Core architecture
-The data structure for hypergraphs and simplicial complexes employed by XGI is a bipartite network with nodes represented by one node class and hyperedges (or simplices) represented by another node class. [Insert Diagram] This is modeled as two dictionaries: one mapping the edge (simplex) IDs of which a node is a member and another specifying the nodes that are members of a given edge (simplex). This data structure is flexible and allows users to efficiently query relationships between nodes and edges (simplices). Each hyperedge is assigned a unique ID which is user-provided or internally generated. This choice allows multiedges, but loopy edges are forbidden because the bipartite relationships are stored as sets. Lastly, two dictionaries store the attributes of the nodes and edges respectively.
+The data structure for hypergraphs and simplicial complexes employed by XGI is a bipartite graph with entities represented by one node class and relationships among entities (i.e. hyperedges or simplices) represented by another node class. [Insert Diagram] This is modeled as two dictionaries: one mapping the hyperedge (or simplex) IDs of which a node is a member and another specifying the nodes that are members of a given hyperedge (or simplex). This data structure is flexible and allows users to efficiently query relationships between nodes and hyperedges. Each hyperedge is assigned a unique ID which is user-provided or internally generated. This choice allows multiedges, but loopy edges (i.e. those that contain the same node more than once) are forbidden because the bipartite relationships are stored as sets. Lastly, two dictionaries store the attributes of the nodes and edges respectively.
 
 ## Hypergraphs, simplicial complexes, and mathematical representations
-The hypergraph data structure provided by XGI offers methods for easily getting, for example, the number of nodes and hyperedges, the nodes that are members of a particular edge and conversely the edges to which a node belongs, subsets of hypergraphs, attributes of nodes and hyperedges. It also allows for easy creation of a hypergraph as well as adding nodes and edges with and without attributes.
+The hypergraph data structure provided by XGI offers methods for easily getting, for example, the number of nodes and hyperedges, the nodes that are members of a particular edge and conversely the edges to which a node belongs, subsets of hypergraphs, attributes of nodes and hyperedges, among other quantities of interest. It also allows for easy creation of a hypergraph as well as adding nodes and edges with and without attributes.
 
 [SIMPLICIAL COMPLEXES HERE]
 
 A hypergraph may be represented in many different ways [@battiston_networks_2020] and different applications require different hypergraph representations for efficient computation. For example, when modeling contagion, a node's infection status may change depending on the statuses of its neighbors, indicating that a representation allowing efficient access to the node's edge neighbors is desirable. Likewise, when one is interested in computing properties of a hypergraph that is averaged over the hyperedges such as assortativity or modularity, it may be most efficient to represent a hypergraph by a list of its hyperedges. XGI provides methods for users to convert between a hypergraph and, among other things, an edge list, adjacency list, or bipartite edge list; an incidence matrix, adjacency matrix, or Laplacian matrix; or a bipartite graph.
 
 ## Stats
+In XGI, the core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an interface with which to build the nodes and links of a network, whereas the `stats` package provides a way to compute summary statistics or other quantities of interest from these networks. The main class defined by the `stats` package is `NodeStat`, which is an abstract representation of a mapping from a node to a quantity. For example, the degree of a node (i.e. the number of edges it belongs to) is a quantity that assigns an integer to each node in the network. The degree in XGI is available via the `nodes` attribute of a network:
+
+```python
+>>> H = xgi.Hypergraph([[0], [0, 1], [1, 2, 3]])
+>>> H.nodes.degree
+NodeStat('degree')
+```
+
+`NodeStat` objects are lazy evaluated, so a specific output type must be requested:
+
+```python
+>>> H.nodes.degree.asdict()
+{0: 2, 1: 2, 2: 1, 3: 1}
+>>> H.nodes.degree.aslist()
+[2, 2, 1, 1]
+```
+
+One of the main benefits of `NodeStat` objects is a common interface for common computations. For example:
+
+```python
+>>> H.nodes.degree.mean()
+1.5
+>>> H.nodes.degree.moment(2)
+2.5
+```
+
+The main benefit of the `stats` package as a whole is that any other notion that can be represented as a node-to-quantity mapping has the same interface. This includes notions such as centrality measures and node attributes. An anologous object for edge-to-quantity mappings is provided via `EdgeStat`. For more, visit the documentation.
 
 
 ## File I/O
