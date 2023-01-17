@@ -62,11 +62,12 @@ We provide an overview of the functionality of the XGI python library.
 
 ## Core architecture: hypergraphs and simplicial complexes
 The two core classes of the library are those representing hypergraphs and simplicial complexes. The data structure employed by XGI for those two is a bipartite graph with entities represented by one node type and relationships among entities (i.e., hyperedges or simplices) represented by another node type. Practically, this is implemented as two dictionaries: one mapping each node to the hyperedge (or simplex) IDs of which it is a member, and another mapping each hyperedge (or simplex) to its member nodes instead.
-![Diagram of the underlying data structure.\label{fig:diagram}](Figures/diagram.png)
+![A diagram of the underlying data structure.\label{fig:diagram}](Figures/diagram.png)
 
 This data structure (seen in \autoref{fig:diagram}) is flexible and allows users to efficiently query relationships between nodes and hyperedges. Each hyperedge is assigned a unique ID which is user-provided or internally generated. This choice allows multi-edges, but loopy hyperedges (i.e., those that contain the same node more than once) are forbidden because the bipartite relationships are stored as sets. Multi-edges are not allowed, however, for simplicial complexes. Simplicial complexes need to respect the inclusion condition which, in XGI, is enforced when adding and removing simplices. Lastly, two dictionaries store the attributes of the nodes and edges respectively.
 
 ## Creating and manipulating
+
 XGI provides several ways to create hypergraphs and simplicial complexes, such as: 
 * Manually adding and removing hyperedges
 * Converting from data in various formats
@@ -89,9 +90,10 @@ Higher-order network datasets are often stored in a variety of different formats
 * A list of hyperedges, where each line of the file is a hyperedge
 * A list of bipartite edges, where each line is a (node, edge) entry
 * An incidence matrix, where each column corresponds to a particular hyperedge, and the non-zero entries correspond to the nodes that participate in that hyperedge.
-* A JSON file according to the xgi-data standard. [ADD A JSON SCHEMA?]
+* A JSON file according to the xgi-data standard.
 
 ### Converting between formats
+
 Once a higher-order network is created, it may be represented in many different ways [@battiston_networks_2020], e.g. an edge list or an incidence matrix,  and different applications require different hypergraph representations for efficient computation. For example, when modeling contagion, a node's infection status may change depending on the statuses of its neighbors, indicating that a representation allowing efficient access to the node's edge neighbors is desirable. Likewise, when one is interested in computing properties of a hypergraph that is averaged over the hyperedges such as assortativity or modularity, it may be most efficient to represent a hypergraph by a list of its hyperedges. XGI provides methods for users to convert between a hypergraph and, among other things, an edge list, adjacency list, or bipartite edge list; an incidence matrix, adjacency matrix, or Laplacian matrix; or a bipartite graph. The two core classes can also be instantiated from input data in any of these formats.
 
 ### Manipulating the structure
@@ -127,7 +129,7 @@ The main benefit of the `stats` package is that any other notion that can be con
 0.25
 ```
 
-Multiple statistics can be handled at the same time. This example computes two statitics and outputs them in a pandas DataFrame, ready for subsequent processing:
+Multiple statistics can be handled at the same time. This example computes two statistics and outputs them in a pandas DataFrame, ready for subsequent processing:
 
 ```python
 >>> H.nodes.multi(["degree", "clustering"]).aspandas()
@@ -150,22 +152,19 @@ Measuring connectedness in hypergraphs is important as a data exploration tool b
 Add centralities. Someth else?
 
 ### Dynamics
-Much research is interested not only in the structure of (higher-order) networks, but also in the dynamical processes that can take place on top of them. Currently, XGI provides functions to simulate two types of synchronization models on hypergraphs: one where oscillators are placed only on the nodes of the hypergraphs [@adhikari_2022], and one where oscillators can also be placed on simplices [@millan_2020, @arnaudon_2022].
-
+Much research is interested not only in the structure of (higher-order) networks, but also in the dynamical processes that can take place on top of them. Currently, XGI provides functions to simulate two types of synchronization models on hypergraphs: one where oscillators are placed only on the nodes of the hypergraphs [@adhikari_synchronization_2022], and one where oscillators can also be placed on simplices [@millan_explosive_2020, @arnaudon_connecting_2022].
 
 ## Visualizing
 ![An example visualization.\label{fig:viz}](Figures/visualization.png)
 
-
 # XGI-DATA
 With larger datasets becoming more widely available, it is important to close the gap between dataset creators and consumers [@gebru_datasheets_2021] because using data without an underlying knowledge of its creation and limitations is an incomplete picture. Although there are many excellent collections of hypergraph datasets [@benson_data_2021;@peixoto_netzschleuder_2021;@clauset_colorado_2016], the format of each dataset and the information about how and why it was collected varies widely. Creating a *datasheet* for each dataset detailing characteristics, limitations, and surrounding factors that informed the collection of that data is a responsible practice in the curation of datasets [@gebru_datasheets_2021]. There is significant work to be done so that researchers can easily access a summary of the dataset's statistics, a description of the collection process, limitations of the dataset, and other relevant information. In addition, a standard format for storing hypergraph datasets with an accompanying standard will reduce the overhead time and increase accuracy for researchers working on cross-disciplinary datasets.
 
-The XGI-DATA repository [@Landry_xgi-data] is a collection of openly available hypergraph datasets in JSON format with documentation more extensively describing the datasets. There is also a rudimentary inspection script for checking that datasets are in the proper format.
+The XGI-DATA repository [@landry_xgi-data_2022] is a collection of openly available hypergraph datasets in JSON format with documentation more extensively describing the datasets. There is also a rudimentary inspection script for checking that datasets are in the proper format.
 
 # Projects using XGI
 * hypercontagion
 * https://github.com/maximelucas/higherorder_sync_promoted
-
 
 # Funding
 The XGI package has been supported by NSF Grant 2121905, "HNDS-I: Using Hypergraphs to Study Spreading Processes in Complex Social Networks".
@@ -177,3 +176,4 @@ We acknowledge contributions from Martina Contisciani, Tim LaRock, Marco Nurisso
 The XGI library remains under active development.
 
 # References
+
