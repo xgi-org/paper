@@ -62,7 +62,7 @@ We provide an overview of the functionality of the XGI python library.
 
 ## Core architecture: hypergraphs and simplicial complexes
 The two core classes of the library are those representing hypergraphs and simplicial complexes. The data structure employed by XGI for those two is a bipartite graph with entities represented by one node type and relationships among entities (i.e., hyperedges or simplices) represented by another node type. Practically, this is implemented as two dictionaries: one mapping each node to the hyperedge (or simplex) IDs of which it is a member, and another mapping each hyperedge (or simplex) to its member nodes instead.
-![Diagram of the underlying data structure.\label{fig:diagram}](Figures/diagram.svg)
+![Diagram of the underlying data structure.\label{fig:diagram}](Figures/diagram.png)
 This data structure can be seen in \autoref{fig:diagram}.
 This data structure is flexible and allows users to efficiently query relationships between nodes and hyperedges. Each hyperedge is assigned a unique ID which is user-provided or internally generated. This choice allows multi-edges, but loopy hyperedges (i.e., those that contain the same node more than once) are forbidden because the bipartite relationships are stored as sets. Multi-edges are not allowed, however, for simplicial complexes. Simplicial complexes need to respect the inclusion condition which, in XGI, is enforced when adding and removing simplices. Lastly, two dictionaries store the attributes of the nodes and edges respectively.
 
@@ -154,7 +154,7 @@ Much research is interested not only in the structure of (higher-order) networks
 
 
 ## Visualizing
-[Graphic here]
+![An example visualization.\label{fig:viz}](Figures/visualization.png)
 
 
 # XGI-DATA
