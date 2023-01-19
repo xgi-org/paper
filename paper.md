@@ -70,6 +70,7 @@ This data structure (seen in \autoref{fig:diagram}) is flexible and allows users
 ## Creating and manipulating
 
 XGI provides several ways to create hypergraphs and simplicial complexes, such as: 
+
 * Manually adding and removing hyperedges
 * Converting from data in various formats
 * Generative models
@@ -144,15 +145,15 @@ Multiple statistics can be handled at the same time. This example computes two s
 An analogous object for edge-to-quantity mappings is provided via `EdgeStat`.
 
 ### Algorithms
-As the field of network science grows, standard algorithms are being developed to describe the structure of higher-order networks. These algorithms include metrics such as the assortativity, centralities, or clustering coefficient; the connectedness or connected components; the community labels of nodes and different clustering objectives; and . XGI has not exhaustively implemented every metric of hypergraph structure, but it has incorporated important measures of assortativity, centrality, connectedness, and clustering. XGI will continue incorporating more of these metrics in the future.
+As the field of network science grows, standard algorithms are being developed to describe the structure of higher-order networks. These algorithms include metrics such as the assortativity, centralities, or clustering coefficient; the connectedness or connected components; the community labels of nodes and different clustering objectives. XGI has not exhaustively implemented every metric of hypergraph structure, but it has incorporated important measures of assortativity, centrality, connectedness, and clustering. XGI will continue incorporating more of these metrics in the future.
 
 ### Dynamics
-Much research is interested not only in the structure of (higher-order) networks, but also in the dynamical processes that can take place on top of them. Currently, XGI provides functions to simulate two types of synchronization models on hypergraphs: one where oscillators are placed only on the nodes of the hypergraphs [@adhikari_synchronization_2022], and one where oscillators can also be placed on simplices [@millan_explosive_2020, @arnaudon_connecting_2022].
+Much research is interested not only in the structure of (higher-order) networks, but also in the dynamical processes that can take place on top of them. Currently, XGI provides functions to simulate two types of synchronization models on hypergraphs: one where oscillators are placed only on the nodes of the hypergraphs [@adhikari_synchronization_2022;@lucas2020multiorder], and one where oscillators can also be placed on simplices [@millan_explosive_2020;@arnaudon_connecting_2022].
 
 ## Visualizing
 The `draw()` function in XGI relies heavily on NetworkX and Matplotlib and allows the user to visualize both hypergraphs and simplicial complexes. \autoref{fig:viz} illustrates an example of a hypergraph visualization. XGI currently offers four different algorithms for calculating the nodal positions used when drawing. The function is tremendously flexible; edge color and node size, face color, and border width and color can be user specified, a constant value or colored based on nodal or edge statistics. This flexibility is illustrated in \autoref{fig:viz} where nodes are colored and sized by the degree and centrality respectively.
 
-![A visualization of the email-enron dataset [@landry_xgi-data_2022,@benson_data_2021] with hyperedges of sizes 2 and 3 (all isolated nodes removed). The nodes are colored by their degree and the area occupied by each node is proportional to the Clique motif Eigenvector Centrality [@benson_three_2019]. \label{fig:viz}](Figures/visualization.png)
+![A visualization of the email-enron dataset [@landry_xgi-data_2022;@benson_data_2021] with hyperedges of sizes 2 and 3 (all isolated nodes removed). The nodes are colored by their degree and the area occupied by each node is proportional to the Clique motif Eigenvector Centrality [@benson_three_2019]. \label{fig:viz}](Figures/visualization.png)
 
 When drawing simplicial complexes, the draw function only displays the pairwise links contained in each maximal simplex (while omitting simplices of intermediate orders) to reduce the clutter in the visualization. Another tool to reduce the clutter when visualizing hypergraphs and simplicial complexes is the specification of the maximum edge size to plot.
 
