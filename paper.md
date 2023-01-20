@@ -155,7 +155,7 @@ Much research is interested not only in the structure of (higher-order) networks
 ## Visualizing
 The `draw()` function in XGI relies heavily on NetworkX and Matplotlib and allows the user to visualize both hypergraphs and simplicial complexes. \autoref{fig:viz} illustrates an example of a hypergraph visualization. XGI currently offers four different algorithms for calculating the nodal positions used when drawing. The function is tremendously flexible; edge color and node size, face color, and border width and color can be user specified, a constant value or colored based on nodal or edge statistics. This flexibility is illustrated in \autoref{fig:viz} where nodes are colored and sized by the degree and centrality respectively.
 
-![A visualization of the email-enron dataset [@landry_xgi-data_2022;@benson_data_2021] with hyperedges of sizes 2 and 3 (all isolated nodes removed). The nodes are colored by their degree and the area occupied by each node is proportional to the Clique motif Eigenvector Centrality [@benson_three_2019]. \label{fig:viz}](Figures/fig_2_joss.pdf)
+![A visualization of the email-enron dataset [@landry_xgi-data_2022;@benson_data_2021] with hyperedges of sizes 2 and 3 (all isolated nodes removed). The nodes are colored by their degree and their size proportional to the Clique motif Eigenvector Centrality [@benson_three_2019]. \label{fig:viz}](Figures/fig_2_joss.pdf)
 
 When drawing simplicial complexes, the draw function only displays the pairwise links contained in each maximal simplex (while omitting simplices of intermediate orders) to reduce the clutter in the visualization. Another tool to reduce the clutter when visualizing hypergraphs and simplicial complexes is the specification of the maximum edge size to plot.
 
