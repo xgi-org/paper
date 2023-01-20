@@ -84,7 +84,8 @@ Generative models are important for the generation of synthetic datasets, which 
 * The Degree-Corrected Stochastic Block Model (DCSBM) model for hypergraphs
 * The Erdős–Rényi model for hypergraphs
 * The configuration model for uniform hypergraphs
-* add the simplicial complex ones
+* The flag complex (or clique complex) of a graph
+* The random simplicial complex 
 
 ### File I/O
 Higher-order network datasets are often stored in a variety of different formats [@benson_data_2021;@clauset_colorado_2016;@peixoto_netzschleuder_2021], which can be a significant overhead cost for researchers trying to analyze empirical datasets. XGI alleviates this cost in two ways: first, by implementing methods for importing and writing hypergraphs from several common formats and second, by implementing a standard for hypergraph data in JSON format. The XGI library offers 4 main types of file input and output:
