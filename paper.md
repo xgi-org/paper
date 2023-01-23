@@ -110,6 +110,7 @@ For hypergraphs and simplicial complexes, XGI offers methods for easily getting 
 The core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an interface with which to build the nodes and links of a network, whereas the `stats` package provides a way to compute summary statistics or other quantities of interest from these networks. The main class defined by the `stats` package is `NodeStat`, which is an abstract representation of a mapping from a node to a quantity. For example, the degree of a node (i.e. the number of edges it belongs to) is a quantity that assigns an integer to each node in the network, thus it is a node-to-quantity mapping. The degree in XGI is available via the `nodes` attribute of a network:
 
 ```python
+>>> ...
 >>> H = xgi.Hypergraph([[0], [0, 1], [1, 2, 3]])
 >>> H.nodes.degree
 NodeStat('degree')
