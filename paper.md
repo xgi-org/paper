@@ -109,40 +109,40 @@ For hypergraphs and simplicial complexes, XGI offers methods for easily getting 
 ### Stats
 The core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an interface with which to build the nodes and links of a network, whereas the `stats` package provides a way to compute summary statistics or other quantities of interest from these networks. The main class defined by the `stats` package is `NodeStat`, which is an abstract representation of a mapping from a node to a quantity. For example, the degree of a node (i.e. the number of edges it belongs to) is a quantity that assigns an integer to each node in the network, thus it is a node-to-quantity mapping. The degree in XGI is available via the `nodes` attribute of a network:
 
-~~~{#code1 .python}
+```
 >>> H = xgi.Hypergraph([[0], [0, 1], [1, 2, 3]])
 >>> H.nodes.degree
 NodeStat('degree')
-~~~
+```
 
 `NodeStat` objects are lazily evaluated, so a specific output type must be requested:
 
-~~~{#code2 .python}
+```
 >>> H.nodes.degree.asdict()
 {0: 2, 1: 2, 2: 1, 3: 1}
 >>> H.nodes.degree.aslist()
 [2, 2, 1, 1]
-~~~
+```
 
 The main benefit of the `stats` package is that any other notion that can be conceived of as a node-to-quantity mapping has the same interface. This includes notions such as other centrality measures, categorical node attributes, and even user-defined functions. Furthermore, all of these are given the exact same interface. For example, obtaining the average degree or average clustering coefficient over the entire network (or the average of any other node-to-quantity mapping) is done with a single method call:
 
-~~~{#code3 .python}
+```
 >>> H.nodes.degree.mean()
 1.5
 >>> H.nodes.clustering.mean()
 0.25
-~~~
+```
 
 Multiple statistics can be handled at the same time. This example computes two statistics and outputs them in a pandas DataFrame, ready for subsequent processing:
 
-~~~{#code4 .python}
+```
 >>> H.nodes.multi(["degree", "clustering"]).aspandas()
    degree  clustering
 0       2         0.0
 1       2         1.0
 2       1         0.0
 3       1         0.0
-~~~
+```
 
 An analogous object for edge-to-quantity mappings is provided via `EdgeStat`.
 
