@@ -113,7 +113,7 @@ The core network classes (i.e. `Hypergraph` and `SimplicialComplex`) provide an 
 >>> H = xgi.Hypergraph([[0], [0, 1], [1, 2, 3]])
 >>> H.nodes.degree
 NodeStat('degree')
-```
+~~~
 
 `NodeStat` objects are lazily evaluated, so a specific output type must be requested:
 
