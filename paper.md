@@ -43,6 +43,8 @@ affiliations:
  - name: Department of Mathematics, Dartmouth College, USA
    index: 6
 
+notes: Authors have been ordered by date of arrival to the project and this order does not reflect their contributions to the project.
+
 date: 03/12/2023
 bibliography: references.bib
 
