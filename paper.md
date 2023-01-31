@@ -175,7 +175,7 @@ The XGI-DATA repository [@landry_xgi-data_2023] is a collection of openly availa
 One of the goals of XGI was to provide a common language and framework on top of which many projects could be built. Even in its nascence, XGI has proved to be an invaluable resource for research projects [@zhang_higher-order_2022] on higher-order networks as well as other software projects [@landry_hypercontagion_2022]. We fully expect that as this library matures, it will become a more essential part of the higher-order network science community.
 
 # Funding
-The XGI package has been supported by NSF Grant 2121905, "HNDS-I: Using Hypergraphs to Study Spreading Processes in Complex Social Networks".
+The XGI package has been supported by NSF Grant 2121905, "HNDS-I: Using Hypergraphs to Study Spreading Processes in Complex Social Networks". I.I. acknowledges support from the James S. McDonnell Foundation $21^{\text{st}}$ Century Science Initiative Understanding Dynamic and Multi-scale Systems - Postdoctoral Fellowship Award.
 
 # Acknowledgements
 We acknowledge contributions from Martina Contisciani, Tim LaRock, Marco Nurisso, Alexis Arnaudon, and Sabina Adhikari.
