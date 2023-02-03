@@ -1,5 +1,5 @@
 ---
-title: 'XGI: A Python package for research on higher-order interactions'
+title: 'XGI: A Python package for higher-order interaction networks'
 tags:
   - python
   - higher-order
